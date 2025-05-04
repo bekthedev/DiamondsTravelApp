@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Results | Dirt on My Diamonds</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-black min-h-screen font-sans">
+
+<!-- Header -->
+<header class="bg-orange-500 p-4 text-white shadow flex items-center space-x-4">
+  <img src="/images/Diamonds.svg" alt="Brand Logo" class="h-10 w-auto">
+  <h1 class="text-2xl font-bold">Diamonds Travel</h1>
+</header>
+
+<!-- Main Content -->
+<main class="p-6 max-w-3xl mx-auto">
+  <h2 class="text-xl font-semibold text-orange-400 mb-4">Flight Results</h2>
+
+  <ul class="space-y-4" th:if="${flights}">
+    <li th:each="flight : ${flights}" class="p-4 border border-orange-400 rounded-lg bg-gray-200">
+      <p><strong>Date:</strong> <span th:text="${flight.flightDate}"></span></p>
+      <p><strong>From:</strong> <span th:text="${flight.origin}"></span></p>
+      <p><strong>To:</strong> <span th:text="${flight.destination}"></span></p>
+      <p><strong>Price:</strong> $<span th:text="${flight.price}"></span></p>
+    </li>
+  </ul>
+
+  <div class="mt-6">
+    <a th:href="@{/index}" class="inline-block px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600">
+      Back to Search
+    </a>
+  </div>
+</main>
+
+</body>
+</html>
