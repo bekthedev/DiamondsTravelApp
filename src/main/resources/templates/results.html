@@ -19,7 +19,7 @@
 
   <ul class="space-y-4" th:if="${flights}">
     <li th:each="flight : ${flights}" class="p-4 border border-orange-400 rounded-lg bg-gray-200">
-      <p><strong>Date:</strong> <span th:text="${flight.flightDate}"></span></p>
+      <p><strong>Date:</strong> <span th:text="${flight.departureDate}"></span></p>
       <p><strong>From:</strong> <span th:text="${flight.origin}"></span></p>
       <p><strong>To:</strong> <span th:text="${flight.destination}"></span></p>
       <p><strong>Price:</strong> $<span th:text="${flight.price}"></span></p>

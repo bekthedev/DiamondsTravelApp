@@ -43,26 +43,37 @@ public class FlightService {
                     apiHost, departureId, arrivalId, date
             );
 
+            // Log the request URL
+            logger.info("Requesting flight data from API with URL: {}", url);
+
             Response response = withApiHeaders(client.prepare("GET", url))
                     .execute()
                     .toCompletableFuture()
                     .join();
 
-            JsonNode root = mapper.readTree(response.getResponseBody());
-            JsonNode calendar = root.path("data").path("calendar");
+            // Log the raw API response
+            String responseBody = response.getResponseBody();
+            logger.info("API response status: {} - Response Body: {}", response.getStatusCode(), responseBody);
 
-            List<Flight> flights = new ArrayList<>();
+            // Parse the response body
+            JsonNode root = mapper.readTree(responseBody);
+            JsonNode dataNode = root.path("data");
 
-            if (calendar.isArray()) {
-                for (JsonNode entry : calendar) {
-                    String flightDate = entry.path("date").asText("");
+            // Check if the data node exists and has flights
+            if (dataNode.isArray()) {
+                List<Flight> flights = new ArrayList<>();
+                for (JsonNode entry : dataNode) {
+                    String flightDate = entry.path("departureDate").asText("");
                     String price = entry.path("price").asText("N/A");
 
+                    // Manually set the origin and destination
                     flights.add(new Flight(flightDate, originCity, destinationCity, price));
                 }
+                return flights;
+            } else {
+                logger.warn("No flight data found in the API response.");
+                return List.of();
             }
-
-            return flights;
 
         } catch (Exception e) {
             logger.error("Error fetching flights", e);
@@ -70,8 +81,15 @@ public class FlightService {
         }
     }
 
+
     private String getAirportCode(AsyncHttpClient client, String cityName) {
         try {
+            // Check if the input is already an IATA code (3 characters long, uppercase)
+            if (cityName.length() == 3 && cityName.equals(cityName.toUpperCase())) {
+                return cityName;  // Return the IATA code directly if it's valid
+            }
+
+            // Otherwise, treat the input as a city name and resolve using the API
             String queryUrl = String.format(
                     "https://%s/auto-complete?query=%s",
                     apiHost, URLEncoder.encode(cityName, StandardCharsets.UTF_8)

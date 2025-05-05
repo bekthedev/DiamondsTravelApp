@@ -1,9 +1,12 @@
 package edu.bekthedev.diamondstravel.controller;
 
+import edu.bekthedev.diamondstravel.model.Flight;
 import edu.bekthedev.diamondstravel.service.FlightService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class FlightSearchController {
@@ -25,9 +28,19 @@ public class FlightSearchController {
                                 @RequestParam String destination,
                                 @RequestParam String date,
                                 Model model) {
-        model.addAttribute("flights", flightService.getFlights(origin, destination, date));
+        // Get the flight data from the service
+        List<Flight> flights = flightService.getFlights(origin, destination, date);
+        // Debugging: Print the flights to the console to check their content
+        System.out.println("Flights: " + flights);
+
+        // Add the flight data to the model
+        model.addAttribute("flights", flights);
+
+        // Return the results view
         return "results";
     }
+
+
 
     @GetMapping("/login")
     public String login() {
