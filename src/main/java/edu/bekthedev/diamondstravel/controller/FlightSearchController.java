@@ -29,14 +29,8 @@ public class FlightSearchController {
                                 Model model) {
         // Get the flight data from the service
         List<Flight> flights = flightService.getFlights(origin, destination, date);
-        // Debugging: Print the flights to the console to check their content
-        System.out.println("Flights: " + flights);
-
-        // Add the flight data to the model
-        model.addAttribute("flights", flights);
-
-        // Return the results view
-        return "results";  // Show the flight results
+        model.addAttribute("flights", flights);  // Add the flight data to the model
+        return "results";  // Show the flight results page
     }
 
     @GetMapping("/login")
@@ -72,7 +66,7 @@ public class FlightSearchController {
         // Simulate fake registration logic
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Passwords do not match");
-            return "register";  // Show error if passwords don't match
+            return "register";  // Return to the registration page with error message
         }
 
         // Log the fake registration (optional, for debugging)

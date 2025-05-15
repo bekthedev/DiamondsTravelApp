@@ -59,5 +59,30 @@
     </div>
 </main>
 
+
+<script>
+document.getElementById("registerForm")?.addEventListener("submit", async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const username = document.getElementById("username")?.value;
+    const password = document.getElementById("password")?.value;
+
+    const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    const result = await response.text();
+    alert(result);
+
+    if (response.ok) {
+        window.location.href = "/login.html"; // Redirect to login on successful registration
+    }
+});
+</script>
 </body>
+
 </html>

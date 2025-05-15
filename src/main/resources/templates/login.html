@@ -23,14 +23,16 @@
                 <label for="username" class="block mb-1 text-orange-500">Username</label>
                 <input id="username" name="username" required
                        class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
-                       placeholder="Enter your username">
+                       placeholder="Enter your username"
+                       value="fakeuser"> <!-- Pre-fill fake username -->
             </div>
 
             <div>
                 <label for="password" class="block mb-1 text-orange-500">Password</label>
                 <input type="password" id="password" name="password" required
                        class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
-                       placeholder="Enter your password">
+                       placeholder="Enter your password"
+                       value="password123"> <!-- Pre-fill fake password -->
             </div>
 
             <button type="submit"
@@ -40,5 +42,31 @@
         </form>
     </div>
 </main>
+
+
+<script>
+document.getElementById("loginForm")?.addEventListener("submit", async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const username = document.getElementById("username")?.value;
+    const password = document.getElementById("password")?.value;
+
+    const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    const result = await response.text();
+    alert(result);
+
+    if (response.ok) {
+        window.location.href = "/index.html"; // Redirect on successful login
+    }
+});
+</script>
 </body>
+
 </html>
