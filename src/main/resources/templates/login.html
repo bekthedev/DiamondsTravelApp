@@ -5,16 +5,15 @@
     <title>Login | Dirt on My Diamonds</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-white min-h-screen font-sans flex flex-col">
-
+<body>
 <!-- Header -->
 <header class="bg-orange-500 p-4 shadow flex items-center space-x-4">
     <img src="/images/Diamonds.svg" alt="Brand Logo" class="h-10 w-auto">
-    <h1 class="text-2xl font-bold">Diamonds Travel</h1>
+    <h1 class="text-2xl text-white font-bold">Diamonds Travel</h1>
 </header>
 
 <!-- Login Form -->
-<main class="flex-grow flex items-center justify-center">
+<main class="flex-grow mt-20 flex items-center justify-center">
     <div class="bg-gray-200 shadow-lg p-8 rounded-xl w-full max-w-md border border-orange-500">
         <h2 class="text-xl font-bold mb-6 text-orange-500 text-center">Login to Book Your Flights</h2>
 
@@ -22,51 +21,25 @@
             <div>
                 <label for="username" class="block mb-1 text-orange-500">Username</label>
                 <input id="username" name="username" required
-                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
+                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-orange-400 placeholder-gray-500"
                        placeholder="Enter your username"
-                       value="fakeuser"> <!-- Pre-fill fake username -->
+                       value="fakeuser">
             </div>
 
             <div>
                 <label for="password" class="block mb-1 text-orange-500">Password</label>
                 <input type="password" id="password" name="password" required
-                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
+                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-orange-400 placeholder-gray-500"
                        placeholder="Enter your password"
-                       value="password123"> <!-- Pre-fill fake password -->
+                       value="password123">
             </div>
 
             <button type="submit"
-                    class="w-full bg-orange-500 text-white font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
+                    class="w-full bg-orange-500 text-orange-100 font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
                 Log In
             </button>
         </form>
     </div>
 </main>
-
-
-<script>
-document.getElementById("loginForm")?.addEventListener("submit", async function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    const username = document.getElementById("username")?.value;
-    const password = document.getElementById("password")?.value;
-
-    const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
-    });
-
-    const result = await response.text();
-    alert(result);
-
-    if (response.ok) {
-        window.location.href = "/index.html"; // Redirect on successful login
-    }
-});
-</script>
 </body>
-
 </html>

@@ -1,78 +1,64 @@
 package edu.bekthedev.diamondstravel.controller;
 
+import edu.bekthedev.diamondstravel.model.Booking;
 import edu.bekthedev.diamondstravel.model.Flight;
+import edu.bekthedev.diamondstravel.service.BookingService;
 import edu.bekthedev.diamondstravel.service.FlightService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class FlightSearchController {
 
     private final FlightService flightService;
+    private final BookingService bookingService;
 
-    public FlightSearchController(FlightService flightService) {
+    // ✅ Constructor injection of both services
+    public FlightSearchController(FlightService flightService, BookingService bookingService) {
         this.flightService = flightService;
+        this.bookingService = bookingService;
     }
 
     @GetMapping({"/", "/index"})
+    public String showLandingPage() {
+        return "index";
+    }
+
+    @GetMapping("/search")
     public String showSearchForm() {
-        return "index";  // Show the flight search page
+        return "search";
     }
 
     @PostMapping("/search")
     public String searchFlights(@RequestParam String origin,
                                 @RequestParam String destination,
                                 @RequestParam String date,
-                                Model model) {
-        // Get the flight data from the service
+                                @RequestParam String departureTime,
+                                Model model,
+                                Principal principal) {
+
+        // Save the booking into the database
+        Booking booking = new Booking(principal.getName(), origin, destination, date, departureTime);
+        bookingService.saveBooking(booking);
+
+        // Retrieve flights from service and add to model
         List<Flight> flights = flightService.getFlights(origin, destination, date);
-        model.addAttribute("flights", flights);  // Add the flight data to the model
-        return "results";  // Show the flight results page
+        model.addAttribute("flights", flights);
+
+        return "results";
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";  // Show the login page
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
-        // Simulate login logic (replace with actual authentication logic later)
-        boolean loggedIn = simulateLogin(username, password);
-
-        if (loggedIn) {
-            return "redirect:/index";  // Redirect to the index page after successful login
-        } else {
-            model.addAttribute("error", "Invalid credentials");
-            return "login";  // Show error message if login fails
-        }
-    }
-
-    private boolean simulateLogin(String username, String password) {
-        // Simple check for fake credentials (replace with actual authentication logic)
-        return "fakeuser".equals(username) && "password123".equals(password);
+    public String loginPage() {
+        return "login";
     }
 
     @GetMapping("/register")
     public String registerPage() {
-        return "register";  // Show the registration page
-    }
-
-    @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password, @RequestParam String confirmPassword, Model model) {
-        // Simulate fake registration logic
-        if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Passwords do not match");
-            return "register";  // Return to the registration page with error message
-        }
-
-        // Log the fake registration (optional, for debugging)
-        System.out.println("Fake user registered: Username: fakeuser, Password: password123");
-
-        // Redirect to the login page after "successful" registration
-        return "redirect:/login";  // Redirect to the login page
+        return "register";
     }
 }

@@ -5,7 +5,7 @@
     <title>Register | Dirt on My Diamonds</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-white min-h-screen font-sans flex flex-col">
+<body class="bg-black text-orange-400 min-h-screen font-sans flex flex-col">
 
 <!-- Header -->
 <header class="bg-orange-500 p-4 shadow flex items-center space-x-4">
@@ -25,7 +25,7 @@
             <div>
                 <label for="username" class="block mb-1 text-orange-500">Username</label>
                 <input id="username" name="username" value="fakeuser" required
-                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
+                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-orange-400 placeholder-gray-500"
                        placeholder="Enter a username" readonly>
             </div>
 
@@ -33,7 +33,7 @@
             <div>
                 <label for="password" class="block mb-1 text-orange-500">Password</label>
                 <input type="password" id="password" name="password" value="password123" required
-                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
+                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-orange-400 placeholder-gray-500"
                        placeholder="Create a password" readonly>
             </div>
 
@@ -41,48 +41,21 @@
             <div>
                 <label for="confirmPassword" class="block mb-1 text-orange-500">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" value="password123" required
-                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-black placeholder-gray-500"
+                       class="w-full px-4 py-2 bg-gray-100 border border-orange-500 rounded-lg text-orange-400 placeholder-gray-500"
                        placeholder="Confirm your password" readonly>
             </div>
 
             <button type="submit"
-                    class="w-full bg-orange-500 text-white font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
+                    class="w-full bg-orange-500 text-orange-400 font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
                 Register (Test Mode)
             </button>
         </form>
 
-        <!-- Instructional text -->
-        <div class="mt-4 text-center">
-            <p class="text-sm text-gray-600">Once you register, you will be redirected to the login page. Use the following credentials to log in:</p>
-            <p class="text-sm text-gray-600 font-semibold">Username: fakeuser, Password: password123</p>
-        </div>
     </div>
 </main>
 
 
-<script>
-document.getElementById("registerForm")?.addEventListener("submit", async function(event) {
-    event.preventDefault(); // Prevent default form submission
 
-    const username = document.getElementById("username")?.value;
-    const password = document.getElementById("password")?.value;
-
-    const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
-    });
-
-    const result = await response.text();
-    alert(result);
-
-    if (response.ok) {
-        window.location.href = "/login.html"; // Redirect to login on successful registration
-    }
-});
-</script>
 </body>
 
 </html>
