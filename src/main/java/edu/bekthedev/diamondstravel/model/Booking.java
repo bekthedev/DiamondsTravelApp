@@ -12,14 +12,14 @@ public class Booking {
     private String origin;
     private String destination;
     private String date;
-    private String departureTime;
+
 
     public Booking(String username, String origin, String destination, String date, String departureTime) {
         this.username = username;
         this.origin = origin;
         this.destination = destination;
         this.date = date;
-        this.departureTime = departureTime;
+
     }
 
     //  Required no-arg constructor for JPA
@@ -32,7 +32,7 @@ public class Booking {
         this.origin = origin;
         this.destination = destination;
         this.date = date;
-        this.departureTime = departureTime;
+
     }
 
     public Long getId() {
@@ -75,11 +75,5 @@ public class Booking {
         this.date = date;
     }
 
-    public String getDepartureTime() {
-        return departureTime;
-    }
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
 }

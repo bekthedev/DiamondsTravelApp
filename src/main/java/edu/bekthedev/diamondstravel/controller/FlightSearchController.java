@@ -37,12 +37,11 @@ public class FlightSearchController {
     public String searchFlights(@RequestParam String origin,
                                 @RequestParam String destination,
                                 @RequestParam String date,
-                                @RequestParam String departureTime,
                                 Model model,
                                 Principal principal) {
 
         // Save the booking into the database
-        Booking booking = new Booking(principal.getName(), origin, destination, date, departureTime);
+        Booking booking = new Booking(principal.getName(), origin, destination, date);
         bookingService.saveBooking(booking);
 
         // Retrieve flights from service and add to model
