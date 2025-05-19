@@ -10,7 +10,7 @@
 <!-- Header -->
 <header class="bg-orange-500 p-4 shadow flex items-center space-x-4">
     <img src="/images/Diamonds.svg" alt="Brand Logo" class="h-10 w-auto">
-    <h1 class="text-2xl font-bold">Diamonds Travel</h1>
+    <h1 class="text-2xl text-white font-bold">Diamonds Travel</h1>
 </header>
 
 <!-- Registration Form -->
@@ -21,7 +21,7 @@
         <p class="text-sm text-gray-600 mb-4">For testing purposes, the registration will use pre-filled fake data. You don’t need to enter anything yourself. Simply click the button below to proceed.</p>
 
         <form th:action="@{/register}" method="post" class="space-y-4">
-            <!-- Username Field (automatically filled for test) -->
+
             <div>
                 <label for="username" class="block mb-1 text-orange-500">Username</label>
                 <input id="username" name="username" value="fakeuser" required
@@ -29,7 +29,7 @@
                        placeholder="Enter a username" readonly>
             </div>
 
-            <!-- Password Field (automatically filled for test) -->
+
             <div>
                 <label for="password" class="block mb-1 text-orange-500">Password</label>
                 <input type="password" id="password" name="password" value="password123" required
@@ -37,7 +37,7 @@
                        placeholder="Create a password" readonly>
             </div>
 
-            <!-- Confirm Password Field (automatically filled for test) -->
+
             <div>
                 <label for="confirmPassword" class="block mb-1 text-orange-500">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" value="password123" required
@@ -46,8 +46,8 @@
             </div>
 
             <button type="submit"
-                    class="w-full bg-orange-500 text-orange-400 font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
-                Register (Test Mode)
+                    class="w-full bg-orange-500 text-white font-semibold py-2 rounded-lg hover:bg-orange-600 transition">
+                Register
             </button>
         </form>
 

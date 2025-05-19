@@ -10,7 +10,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>edu.bekthedev</groupId>
@@ -24,7 +24,7 @@
     </properties>
 
     <dependencies>
-        <!-- Web + MVC -->
+        <!-- Web Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -55,7 +55,7 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- XML Bind (for users.xml) -->
+        <!-- XML Bind  -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -67,7 +67,7 @@
             <version>3.0.1</version>
         </dependency>
 
-        <!-- Async HTTP Client (used in your project) -->
+        <!-- Async HTTP Client  -->
         <dependency>
             <groupId>org.asynchttpclient</groupId>
             <artifactId>async-http-client</artifactId>
