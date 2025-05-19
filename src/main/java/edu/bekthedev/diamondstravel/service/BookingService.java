@@ -11,14 +11,15 @@ public class BookingService {
 
     private final BookingRepository bookingRepository;
 
+    //constructor
     public BookingService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
-
+    //saave booking
     public Booking saveBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
-
+    //get bookings for user
     public List<Booking> getBookingsForUser(String username) {
         return bookingRepository.findByUsername(username);
     }

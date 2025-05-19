@@ -14,12 +14,12 @@ public class SecurityConfig {
 
     private final XmlUserDetailsService userDetailsService;
 
-    // Inject custom user details service that reads users from XML
+
     public SecurityConfig(XmlUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
-    // Define security rules: what routes are public, what requires login
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -39,7 +39,7 @@ public class SecurityConfig {
             )
             .build();
     }
-    // Provide authentication manager that uses our XML-based user details service
+
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);

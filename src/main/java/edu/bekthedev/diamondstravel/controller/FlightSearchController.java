@@ -17,7 +17,7 @@ public class FlightSearchController {
     private final FlightService flightService;
     private final BookingService bookingService;
 
-    // ✅ Constructor injection of both services
+    //  Constructor for services
     public FlightSearchController(FlightService flightService, BookingService bookingService) {
         this.flightService = flightService;
         this.bookingService = bookingService;

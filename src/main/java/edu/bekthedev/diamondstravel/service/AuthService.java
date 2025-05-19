@@ -14,12 +14,14 @@ import java.io.File;
 public class AuthService {
     private final String XML_PATH = "src/main/resources/users.xml";
 
+    // read
     public Users readUsers() throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Users.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (Users) unmarshaller.unmarshal(new File(XML_PATH));
     }
 
+    // write
     public void writeUsers(Users users) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Users.class);
         Marshaller marshaller = context.createMarshaller();
@@ -27,6 +29,7 @@ public class AuthService {
         marshaller.marshal(users, new File(XML_PATH));
     }
 
+    //checks username and password
     public boolean authenticate(String username, String password) {
         try {
             Users users = readUsers();
@@ -37,6 +40,7 @@ public class AuthService {
         }
     }
 
+    //add new user
     public boolean register(User newUser) {
         try {
             Users users = readUsers();

@@ -11,6 +11,7 @@ public class User {
     public User() {
     }
 
+    //constructor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -18,6 +19,7 @@ public class User {
 
     @XmlElement
     public String getUsername() {
+
         return username;
     }
 

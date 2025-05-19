@@ -16,10 +16,10 @@ import java.io.File;
 public class XmlUserDetailsService implements UserDetailsService {
 
 
-    // Path to XML file that contains user credentials
+    //user credentials
     private final String USERS_XML = "src/main/resources/users.xml";
 
-    // Called automatically by Spring Security to authenticate users
+    // Spring Security
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
@@ -34,7 +34,7 @@ public class XmlUserDetailsService implements UserDetailsService {
                 String userName = user.getElementsByTagName("username").item(0).getTextContent();
                 String password = user.getElementsByTagName("password").item(0).getTextContent();
 
-                // If username matches, return Spring Security user object
+
                 if (userName.equals(username)) {
                     return User.withUsername(userName)
                             .password("{noop}" + password)
@@ -46,7 +46,7 @@ public class XmlUserDetailsService implements UserDetailsService {
         } catch (Exception e) {
             throw new UsernameNotFoundException("Could not load users.xml", e);
         }
-        // No matching username found
+
         throw new UsernameNotFoundException("User not found");
     }
 }

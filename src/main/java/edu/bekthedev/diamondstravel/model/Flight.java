@@ -9,6 +9,7 @@ public class Flight {
 
     public Flight() {}
 
+    //constructors
     public Flight(String departureDate, String origin, String destination, String price) {
         this.departureDate = departureDate;
         this.origin = origin;
@@ -16,6 +17,7 @@ public class Flight {
         this.price = price;
     }
 
+    //getter and setters
     public String getDepartureDate() {
         return departureDate;
     }
